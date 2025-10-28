@@ -1,3 +1,5 @@
+# Notions :
+# List comprehension
 
 import sys
 import string

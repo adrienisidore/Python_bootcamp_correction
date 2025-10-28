@@ -19,19 +19,16 @@ def calculator(A, B):
 	print(f"Quotient: {quot}")
 	print(f"Remainder: {rem}")
 
-# from main import calculator
-
 if __name__ == "__main__":
-	# Vérification du nombre d'arguments
+
 	if len(sys.argv) < 3:
 		print("Usage: python script.py <int A> <int B>")
 		sys.exit(0)
 
 	if len(sys.argv) > 3:
 		print("Error: exactly two arguments required")
-		sys.exit(1)
+		sys.exit(0)
 
-	# Conversion en entiers
 	try:
 		A = int(sys.argv[1])
 		B = int(sys.argv[2])
@@ -39,5 +36,4 @@ if __name__ == "__main__":
 		print("Error: both arguments must be integers")
 		sys.exit(1)
 
-	# Appel de la fonction
 	calculator(A, B)

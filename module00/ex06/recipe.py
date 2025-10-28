@@ -1,13 +1,7 @@
-# - cookbook est un dictionnaire dont les clés sont les noms des recettes
-# - chaque recette est elle-même un dictionnaire avec au moins 3 clés :
-#   * "ingredients" : liste des ingrédients
-#   * "meal"        : type de repas (déjeuner, dessert, etc.)
-#   * "prep_time"   : temps de préparation en minutes
-# - ce format permet d'accéder facilement aux informations d'une recette
-#   ex: cookbook["Cake"]["ingredients"] -> ["flour", "sugar", "eggs"]
+# Notions :
+# Nested dictionnaries
 
 # Un dictionnaire peut avoir des clés de differents types
-
 
 # ----- Initialisation du cookbook -----
 cookbook = {
