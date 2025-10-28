@@ -6,7 +6,7 @@ def main():
     print("Type 'exit' to end the game")
     print("Good luck!")
     found = False
-    count = 0
+    count = 1
     number = random.randint(1, 99)
     while not found:
         guess = input("what is your guess between 1 and 99?\n>>> ")
@@ -18,6 +18,10 @@ def main():
             guess = input("what is your guess between 1 and 99?\n>>> ")
         guess = int(guess)
         if guess == number:
+            if(number == 42):
+                print("The answer to the ultimate question of life, the universe and everything is 42.")
+            if(count == 1):
+                print("First try, nice!")
             print("Congratulations, you've got it!")
             print(f"You won in {count} attempts!")
             return (0)

@@ -1,41 +1,30 @@
-import  sys
+
+import sys
 import  string
 
-morse_values_alpha = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", 
-                ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..--", "...-",
-                ".--", "-..-", "-.--", "--.."]
+morse = {
+    'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',
+    'E': '.',     'F': '..-.',  'G': '--.',   'H': '....',
+    'I': '..',    'J': '.---',  'K': '-.-',   'L': '.-..',
+    'M': '--',    'N': '-.',    'O': '---',   'P': '.--.',
+    'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
+    'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',
+    'Y': '-.--',  'Z': '--..',
 
-morse_values_numbers = [i * '.' + (5 - i) * '-' for i in range(5)] + [i * '-' + (5 - i) * '.' for i in range(5)]
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+    '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+    '8': '---..', '9': '----.', ' ': '/'
+}
 
-morse_values = morse_values_alpha + morse_values_numbers
+if len(sys.argv) == 1:
+    print("Give me at least one string por favor")
+    sys.exit(1)
 
-morse_keys = string.ascii_lowercase + string.digits
+if not all(all(c.isalnum() or c.isspace() for c in arg) for arg in sys.argv[1:]):
+    print("Give me alphanumeric characters or spaces only por favor")
+    sys.exit(1)
 
-morse = dict(zip(morse_keys, morse_values)) # => conversion d'un iterateur en iterable
+phrase = " ".join(sys.argv[1:]).upper()
 
-# zip renvoie un iterateur de tuples
-"""
-z = zip([1, 2, 3], ['a', 'b'])
-print(type(z))            # <class 'zip'>
-print(list(z))            # [(1, 'a'), (2, 'b')]
-"""
-
-def main():
-    if len(sys.argv) <= 1:
-        return print("Error: wrong number of args") or 1
-    bigs = ' '.join(sys.argv[1:])
-    i = 0
-    while i in range(len(bigs)):
-        if bigs[i] == ' ':
-            print('/', end = "")
-        elif bigs[i].isalnum():
-            if bigs[i].isupper():
-                print(morse[bigs[i].lower()], end = "")
-            else:
-                print(morse[bigs[i]], end = "")
-        i += 1
-    print("")
-    return 0
-
-if __name__ == "__main__":
-    main()
+for c in phrase:
+    print(morse[c], end=" ")
