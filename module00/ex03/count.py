@@ -29,8 +29,8 @@ def text_analyzer(txt=None):
 
 # Script VS programme
 # Programme: "python3 *nom_programme*"
-	#1 - Sans __name__ == __main__ execute de haut en bas
-	#2 - Avec __name__ == __main__ execute la fonction main
+	#1 - Sans __name__ == "__main__" execute de haut en bas (name recupere nom du module)
+	#2 - Avec __name__ == "__main__" execute la fonction main
 # Script: "python3 *enter*" + "import ... from ..."
 	#Appel de fonction depuis l'intepreteur python
 
