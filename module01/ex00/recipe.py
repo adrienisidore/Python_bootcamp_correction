@@ -1,8 +1,5 @@
 class Recipe:
 
-	# variables de classe <ici>
-
-	#constructeur
 	def __init__(self, name=None, cooking_lvl=0, cooking_time=0, ingredients=None, description="", recipe_type=""):
 
 		if not isinstance(name, str):
@@ -28,7 +25,6 @@ class Recipe:
 			raise ValueError("cooking time must be a positine integer")
 		if recipe_type not in {"starter", "lunch", "dessert"}:
 			raise ValueError("invalid recipe_type")
-		
 		self.name = name
 		self.cooking_lvl = cooking_lvl
 		self.cooking_time = cooking_time
@@ -36,7 +32,6 @@ class Recipe:
 		self.description = description
 		self.recipe_type = recipe_type
 
-#Surcharge du casting str()
 	def __str__(self):
 		"""Returns the string to print with the recipe’s info"""
 		return f"{self.name}"

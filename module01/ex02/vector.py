@@ -63,7 +63,7 @@ class Vector:
 		if not isinstance(vec2, Vector):
 			raise TypeError("Invalid type argument for dot()")
 		if self.shape[1] != vec2.shape[0]:# n's (1, n).(n, 1)
-			raise ValueError("Vectors must have the same shape for dot product")
+			raise ValueError("dot product is only possible between 2D Vectors of shape (1, n).(n, 1)")
 		result = 0.0
 		if self.shape[0] == 1:  # self = [[1., 2., 3.]] , vec2 = [[1.], [2.], [3.]]
 			for i in range(self.shape[1]):
@@ -87,7 +87,11 @@ class Vector:
 
 	def __str__(self):
 		"""Returns the string to print with the Vector"""
-		return f"{self.values}"
+		return f"Vector({self.values})"
+
+	# Checker si c'est bon
+	def __repr__(self):
+		return self.__str__()
 
 	def __add__(self, rhs):
 		if not isinstance(rhs, Vector):
@@ -101,21 +105,35 @@ class Vector:
 			col = [[self.values[i][0] + rhs.values[i][0]] for i in range(self.shape[0])]
 			return Vector(col)
 
+	def __mul__(self, rhs):
+		if isinstance(rhs, (int, float)):
+			# multiplication by a scalar "rhs"
+			if self.shape[0] == 1:
+				return Vector([[val * rhs for val in self.values[0]]])
+			else:
+				return Vector([[row[0] * rhs] for row in self.values])
+		raise TypeError("Only scalar multiplication supported")
+		# return NotImplemented : Python would then try __rmul__
+
+	def __truediv__(self, rhs):
+		if isinstance(rhs, (int, float)):
+			if rhs == 0:
+				raise ValueError("Can't divide a Vector by 0")
+			return self.__mul__(1 / rhs)
+		raise TypeError("Only division by a scalar is supported")
+
+	def __rtruediv__(self, lhs):
+		raise NotImplementedError("Division of a scalar by a Vector is not defined here.")
+
+	def __rmul__(self, lhs):
+		return self.__mul__(lhs)
+
 	# When this instance is on rhs, and method __add__ of lhs returns NotImplemented
 	def __radd__(self, lhs):
 		return self.__add__(lhs)
 
+	def __sub__(self, rhs):
+		return self.__add__(rhs * -1)
 
-# __sub__
-# __rsub__
-# # sub & rsub: only vectors of the same shape.
-# __truediv__
-# # truediv : only with scalars (to perform division of a Vector by a scalar). Pas de /0
-# __rtruediv__
-# # rtruediv : raises an NotImplementedError with the message "Division of a scalar by a Vector is not defined here."
-# __mul__
-# __rmul__
-# # mul & rmul: only scalars (to perform multiplication of a Vector by a scalar).
-# __str__
-# __repr__
-# # must be identical, i.e we expect that print(vector) and vector within python interpretor to behave the same, see correspo
+	def __rsub__(self, lhs):
+		return self.__sub__(lhs)
